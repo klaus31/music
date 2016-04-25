@@ -1,0 +1,15 @@
+version: '2'
+services:
+
+  music:
+    container_name: music
+    build:
+      context: ./etc/docker/sonic-pi/.
+      dockerfile: Dockerfile
+    ports:
+      - "4557:4557"
+      - "4558:4558"
+    environment:
+      DISPLAY: $DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
