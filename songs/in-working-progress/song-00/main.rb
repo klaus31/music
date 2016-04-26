@@ -4,11 +4,15 @@
 var_loop = 3
 var_tempo = 0.18
 
-var_aktivate_drum_line = true
-var_aktivate_bass_line = true
-var_aktivate_lead_line = true
+var_aktivate_drum_line_0 = true
+var_aktivate_bass_line_0 = true
+var_aktivate_lead_line_0 = true
 
-if var_aktivate_drum_line
+var_aktivate_drum_line_1 = false
+
+var_aktivate_section_0 = var_aktivate_drum_line_0 || var_aktivate_bass_line_0 || var_aktivate_lead_line_0
+
+if var_aktivate_drum_line_0
   in_thread do
 
     args = Hash.new
@@ -25,7 +29,7 @@ if var_aktivate_drum_line
   end
 end
 
-if var_aktivate_bass_line
+if var_aktivate_bass_line_0
   in_thread do
 
     args = Hash.new
@@ -38,12 +42,10 @@ if var_aktivate_bass_line
     var_loop.times do
       f3_bass_groove(args)
     end
-    sleep args[:tempo] * 12
-    sample args[:bass_sample], amp: args[:amp] * 2, pan: -1
   end
 end
 
-if var_aktivate_lead_line
+if var_aktivate_lead_line_0
   in_thread do
     use_synth :sine
     args = Hash.new
@@ -58,4 +60,28 @@ if var_aktivate_lead_line
       f5_lead_tones(args)
     end
   end
+end
+
+if var_aktivate_section_0
+  sleep var_tempo * var_loop * 60
+end
+
+if var_aktivate_drum_line_1
+  in_thread do
+
+    args = Hash.new
+    args[:tempo] = var_tempo
+
+    var_loop.times do
+      1.times do # x 8 tempo
+        f6_drum_speed(args)
+      end
+    end
+  end
+end
+
+# the end
+in_thread do
+  sleep var_tempo * 12
+  sample :bass_woodsy_c, amp: 2, pan: -1
 end
