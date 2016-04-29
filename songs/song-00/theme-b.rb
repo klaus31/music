@@ -3,8 +3,8 @@
 
 in_thread do
   args = Hash.new
-  args[:tempo] = var_tempo
-  1.times do
+  args[:tempo] = song.getBaseSleep
+  2.times do
     f6_drum_speed(args)
   end
   1.times do # x 8 tempo
@@ -12,4 +12,4 @@ in_thread do
   end
 end
 
-sleep (var_tempo * 8) * 2
+sleep (song.getBaseSleep * 8) * 2

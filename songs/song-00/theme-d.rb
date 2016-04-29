@@ -4,7 +4,7 @@
 # the end
 if var_activate_end
   in_thread do
-    sleep var_tempo * 12
+    sleep song.getBaseSleep * 12
     sample :bass_woodsy_c, amp: 2, pan: -1
   end
 end

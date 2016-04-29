@@ -5,7 +5,7 @@ var_loop = 3
 
 in_thread do
   args = Hash.new
-  args[:tempo] = var_tempo
+  args[:tempo] = song.getBaseSleep
   args[:amp_cymbal] = 0.2
   var_loop.times do
     # 60 x tempo
@@ -18,7 +18,7 @@ end
 
 in_thread do
   args = Hash.new
-  args[:tempo] = var_tempo
+  args[:tempo] = song.getBaseSleep
   args[:amp_cymbal] = 0.2
   args[:amp] = 0.15
   args[:pan] = -1
@@ -33,7 +33,7 @@ in_thread do
   args = Hash.new
   args[:tones] = u1_rrand_i_list(:number => 14)
   args[:sleeps] = [1.25,0.75,1,1,1.25,0.75,1,1,1.25,0.75,1,1,1.25,1.75]
-  args[:tempo] = var_tempo * 4
+  args[:tempo] = song.getBaseSleep * 4
   args[:tonic] = :Fs
   args[:amp] = 0.25
   args[:pan] = [0.9, 0, -0.9, 0]
@@ -42,3 +42,5 @@ in_thread do
     f5_lead_tones(args)
   end
 end
+
+sleep song.getBaseSleep * 60 * var_loop

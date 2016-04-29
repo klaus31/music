@@ -1,23 +1,34 @@
 # hier ein erster versuch eines songs
 # start coding: 22.4.2016
 
-var_loop = 3
 in_thread do
   args = Hash.new
-  args[:tempo] = var_tempo
-  var_loop.times do
+  args[:tempo] = song.getBaseSleep
+  2.times do # x 8 tempo
+    f6_drum_speed(args)
+  end
+  1.times do # x 8 tempo
+    f7_drum_fill_speed(args)
+  end
+  1.times do # x 4 tempo
+    f6_drum_speed(args)
+  end
+  1.times do # x 8 tempo
+    f7_drum_fill_speed(args)
+  end
+  1.times do # x 4 tempo
     f6_drum_speed(args)
   end
 end
 
 in_thread do
   args = Hash.new
-  args[:tempo] = var_tempo
+  args[:tempo] = song.getBaseSleep
   args[:amp_cymbal] = 0.2
   args[:amp] = 0.15
   args[:pan] = -1
   args[:bass_sample] = :bass_woodsy_c
-  var_loop.times do
-    f3_bass_groove(args)
-  end
+  f3_bass_groove(args)
 end
+
+sleep song.getBaseSleep * var_loop
